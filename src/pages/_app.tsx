@@ -3,6 +3,7 @@ import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { emotionCache } from '../utils/emotionCache';
+import Layout from '../components/layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -21,7 +22,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         emotionCache={emotionCache}
       >
         <SessionProvider session={session}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </SessionProvider>
       </MantineProvider>
     </>
