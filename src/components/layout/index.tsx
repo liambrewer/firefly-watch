@@ -1,5 +1,6 @@
 import { AppShell } from '@mantine/core';
 import Header from './header';
+import Footer from './footer';
 
 type Props = {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ const Layout = ({ children }: Props) => {
   return (
     <AppShell
       padding='md'
+      footer={<Footer />}
       header={<Header />}
       sx={(theme) => ({
         main: {
