@@ -1,37 +1,14 @@
-import {
-  Box,
-  Divider,
-  Group,
-  Header as MantineHeader,
-  Text,
-} from '@mantine/core';
-import { useSession } from 'next-auth/react';
-import HeaderAuthButtons from './auth-buttons';
+import { Box, Header as MantineHeader } from '@mantine/core';
 import HeaderLogo from './logo';
-import HeaderLogout from './logout';
-import HeaderThemeToggle from './theme-toggle';
+import HeaderUserArea from './user-area';
 
 const Header = () => {
-  const session = useSession();
-
   return (
     <MantineHeader height={60} p='xs'>
       <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
         <HeaderLogo />
         <Box sx={{ flexGrow: 1 }} />
-        <Group>
-          {session?.data?.user ? (
-            <Text>Hey, {session.data.user.name}.</Text>
-          ) : (
-            <HeaderAuthButtons />
-          )}
-          {/* <HeaderAuthButtons /> */}
-          <Divider orientation='vertical' />
-          <Group spacing='xs'>
-            <HeaderThemeToggle />
-            {session?.data?.user && <HeaderLogout />}
-          </Group>
-        </Group>
+        <HeaderUserArea />
       </Box>
     </MantineHeader>
   );
