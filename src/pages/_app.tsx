@@ -1,4 +1,4 @@
-import type { AppProps } from 'next/app';
+import type { AppContext, AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
@@ -6,17 +6,25 @@ import type { ColorScheme } from '@mantine/core';
 import { emotionCache } from '../utils/emotionCache';
 import Layout from '../components/layout';
 import { NotificationsProvider } from '@mantine/notifications';
-import { useLocalStorage } from '@mantine/hooks';
+import { getCookie, setCookie } from 'cookies-next';
+import App from 'next/app';
+import { useState } from 'react';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-    key: 'mantine-color-scheme',
-    defaultValue: 'light',
-    getInitialValueInEffect: true,
-  });
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+  ...props
+}: AppProps & { colorScheme: ColorScheme }) {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(
+    props.colorScheme
+  );
 
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  const toggleColorScheme = (value?: ColorScheme) => {
+    const nextColorScheme =
+      value || (colorScheme === 'dark' ? 'light' : 'dark');
+    setColorScheme(nextColorScheme);
+    setCookie('mantine-color-scheme', nextColorScheme);
+  };
 
   return (
     <>
@@ -48,3 +56,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 }
 
 export default MyApp;
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const pageProps = await App.getInitialProps(appContext);
+
+  return {
+    ...pageProps,
+    colorScheme: getCookie('mantine-color-scheme', appContext.ctx) || 'light',
+  };
+};
