@@ -1,6 +1,7 @@
-import { Box, Header as MantineHeader, Title } from '@mantine/core';
+import { Box, Group, Header as MantineHeader, Title } from '@mantine/core';
 import HeaderAuthButtons from './auth-buttons';
 import HeaderLogo from './logo';
+import HeaderThemeToggle from './theme-toggle';
 
 const Header = () => {
   return (
@@ -8,7 +9,10 @@ const Header = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
         <HeaderLogo />
         <Box sx={{ flexGrow: 1 }} />
-        <HeaderAuthButtons />
+        <Group>
+          <HeaderAuthButtons />
+          <HeaderThemeToggle />
+        </Group>
       </Box>
     </MantineHeader>
   );
