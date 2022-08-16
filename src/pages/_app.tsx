@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { emotionCache } from '../utils/emotionCache';
 import Layout from '../components/layout';
+import { NotificationsProvider } from '@mantine/notifications';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -21,11 +22,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         }}
         emotionCache={emotionCache}
       >
-        <SessionProvider session={session}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SessionProvider>
+        <NotificationsProvider>
+          <SessionProvider session={session}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </SessionProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </>
   );
