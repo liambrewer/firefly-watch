@@ -10,11 +10,15 @@ import { getCookie, setCookie } from 'cookies-next';
 import App from 'next/app';
 import { useState } from 'react';
 
+type Props = {
+  colorScheme: ColorScheme;
+};
+
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
   ...props
-}: AppProps & { colorScheme: ColorScheme }) {
+}: AppProps & Props) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>(
     props.colorScheme
   );
