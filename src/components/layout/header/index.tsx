@@ -11,6 +11,10 @@ const HeaderNavLinks: HeaderLink[] = [
     href: '/',
   },
   {
+    title: 'Map',
+    href: '/map',
+  },
+  {
     title: 'About',
     href: '/about',
   },
