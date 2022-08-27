@@ -1,34 +1,43 @@
-import { Navbar as MantineNavbar, NavLink, ThemeIcon } from '@mantine/core';
-import { IconHome, IconSettings } from '@tabler/icons';
-import Link from 'next/link';
+import { Navbar as MantineNavbar } from '@mantine/core';
+import {
+  IconCurrentLocation,
+  IconEye,
+  IconHome,
+  IconSettings,
+} from '@tabler/icons';
+import NavbarLinks, { NavbarLink } from './links';
+
+const NavLinks: NavbarLink[] = [
+  {
+    title: 'Home',
+    href: '/dashboard',
+    icon: <IconHome size={16} />,
+  },
+  {
+    title: 'Observations',
+    href: '/dashboard/observations',
+    icon: <IconEye size={16} />,
+    color: 'violet',
+  },
+  {
+    title: 'Locations',
+    href: '/dashboard/locations',
+    icon: <IconCurrentLocation size={16} />,
+    color: 'teal',
+    exact: false,
+  },
+  {
+    title: 'Settings',
+    href: '/dashboard/settings',
+    icon: <IconSettings size={16} />,
+    color: 'orange',
+  },
+];
 
 const Navbar = () => {
   return (
     <MantineNavbar width={{ base: 250 }} p='xs'>
-      <MantineNavbar.Section grow>
-        <Link href='/dashboard' passHref>
-          <NavLink
-            component='a'
-            label='Home'
-            icon={
-              <ThemeIcon color='blue' variant='light'>
-                <IconHome size={16} />
-              </ThemeIcon>
-            }
-          />
-        </Link>
-        <Link href='/dashboard/settings' passHref>
-          <NavLink
-            component='a'
-            label='Settings'
-            icon={
-              <ThemeIcon color='orange' variant='light'>
-                <IconSettings size={16} />
-              </ThemeIcon>
-            }
-          />
-        </Link>
-      </MantineNavbar.Section>
+      <NavbarLinks links={NavLinks} />
     </MantineNavbar>
   );
 };
