@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 export type HeaderLink = {
   title: string;
   href: string;
+  exact?: boolean;
 } & ButtonProps;
 
 type Props = {
@@ -17,8 +18,10 @@ const HeaderLinks = ({ links }: Props) => {
 
   return (
     <Group spacing='xs'>
-      {links.map(({ title, href, ...buttonProps }) => {
-        const active = router.pathname === href;
+      {links.map(({ title, href, exact = true, ...buttonProps }) => {
+        const active = exact
+          ? router.pathname === href
+          : router.pathname.startsWith(href);
 
         return (
           <Link href={href} key={title} passHref>

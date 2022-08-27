@@ -18,6 +18,11 @@ const HeaderNavLinks: HeaderLink[] = [
     title: 'About',
     href: '/about',
   },
+  {
+    title: 'Dashboard',
+    href: '/dashboard',
+    exact: false,
+  },
 ];
 
 const Header = () => {
