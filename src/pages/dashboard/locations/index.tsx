@@ -3,16 +3,21 @@ import { IconLocation } from '@tabler/icons';
 import type { NextPage } from 'next';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderAction from '../../../components/dashboard/header/action';
-import ModalNewLocation from '../../../components/modals/new-location';
+import DrawerNewLocation from '../../../components/drawers/new-location';
 
 const Locations: NextPage = () => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
 
   return (
     <>
-      <ModalNewLocation opened={modalOpened} onClose={modalHandlers.close} />
+      <DrawerNewLocation
+        opened={modalOpened}
+        onClose={modalHandlers.close}
+        position='right'
+      />
       <DashboardHeader
         title='Locations'
+        color='green'
         action={
           <DashboardHeaderAction
             title='New Location'

@@ -1,15 +1,21 @@
-import { Box, Divider, Group, Stack, Title } from '@mantine/core';
+import { Divider, Group, Loader, Stack, Title } from '@mantine/core';
+import type { DefaultMantineColor } from '@mantine/core';
 
 type Props = {
   title: string;
+  color?: DefaultMantineColor;
+  loading?: boolean;
   action?: React.ReactNode;
 };
 
-const DashboardHeader = ({ title, action }: Props) => {
+const DashboardHeader = ({ title, color = 'blue', loading, action }: Props) => {
   return (
     <Stack spacing='xs'>
       <Group position='apart'>
-        <Title>{title}</Title>
+        <Group spacing='xs'>
+          <Title>{title}</Title>
+          {loading && <Loader color={color} />}
+        </Group>
         {action}
       </Group>
       <Divider />

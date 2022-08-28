@@ -13,6 +13,7 @@ const Observations: NextPage = () => {
       <ModalNewObservation opened={modalOpened} onClose={modalHandlers.close} />
       <DashboardHeader
         title='Observations'
+        color='violet'
         action={
           <DashboardHeaderAction
             title='New Observation'
