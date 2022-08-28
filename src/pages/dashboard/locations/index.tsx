@@ -1,12 +1,17 @@
+import { Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconLocation } from '@tabler/icons';
 import type { NextPage } from 'next';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderAction from '../../../components/dashboard/header/action';
+import DashboardLocationsList from '../../../components/dashboard/locations/list';
 import DrawerNewLocation from '../../../components/drawers/new-location';
+import useLocations from '../../../hooks/use-locations';
 
 const Locations: NextPage = () => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
+
+  const { data: locations, isLoading, isError } = useLocations();
 
   return (
     <>
@@ -18,6 +23,7 @@ const Locations: NextPage = () => {
       <DashboardHeader
         title='Locations'
         color='green'
+        loading={isLoading}
         action={
           <DashboardHeaderAction
             title='New Location'
@@ -27,6 +33,12 @@ const Locations: NextPage = () => {
           </DashboardHeaderAction>
         }
       />
+      {locations &&
+        (locations.length > 0 ? (
+          <DashboardLocationsList locations={locations} />
+        ) : (
+          <Text>No locations found.</Text>
+        ))}
     </>
   );
 };

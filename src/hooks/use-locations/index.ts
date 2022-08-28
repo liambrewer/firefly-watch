@@ -1,13 +1,14 @@
+import type { Location } from '@prisma/client';
 import useSWR from 'swr';
 import fetcher from '../../utils/fetcher';
 
 export const endpoint = '/api/locations';
 
 const useLocations = () => {
-  const { data, error } = useSWR(endpoint, fetcher);
+  const { data, error } = useSWR<Location[]>(endpoint, fetcher);
 
   return {
-    locations: data,
+    data: data,
     isLoading: !error && !data,
     isError: error,
   };
