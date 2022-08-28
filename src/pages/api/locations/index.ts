@@ -7,14 +7,14 @@ type Data = {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { session, user } = await getServerSession(req, res);
+  const session = await getServerSession(req, res);
 
-  if (!session || !user) return res.status(401).json({ locations: [] });
+  if (!session) return res.status(401).json({ locations: [] });
 
   const prisma = new PrismaClient();
   const locations = await prisma.location.findMany({
     where: {
-      userId: user.id,
+      userId: session.user.id,
     },
   });
 
