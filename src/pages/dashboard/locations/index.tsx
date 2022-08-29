@@ -22,6 +22,7 @@ const Locations: NextPage = () => {
       />
       <DashboardHeader
         title='Locations'
+        error={isError ? isError.message : null}
         color='green'
         loading={isLoading || isValidating}
         action={

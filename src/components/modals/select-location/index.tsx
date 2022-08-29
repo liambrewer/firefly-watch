@@ -3,6 +3,7 @@ import {
   Button,
   Collapse,
   Modal,
+  SegmentedControl,
   Stack,
   Text,
 } from '@mantine/core';
@@ -25,6 +26,8 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
     null
   );
 
+  const [mapType, setMapType] = useState<'street' | 'satellite'>('street');
+
   const handleClose = () => {
     latlng && onSelect(latlng);
     setLatlng(null);
@@ -39,10 +42,19 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
       size='xl'
     >
       <Stack>
+        <SegmentedControl
+          data={[
+            { label: 'Street', value: 'street' },
+            { label: 'Satellite', value: 'satellite' },
+          ]}
+          value={mapType}
+          onChange={(value) => setMapType(value as 'street' | 'satellite')}
+        />
         <AspectRatio ratio={16 / 9}>
           <SelectMapWithNoSSR
             handleClick={(value) => setLatlng(value)}
             markerPos={latlng}
+            satelite={mapType === 'satellite'}
           />
         </AspectRatio>
         <Collapse in={latlng !== null}>
