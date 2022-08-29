@@ -5,12 +5,15 @@ import fetcher from '../../utils/fetcher';
 export const endpoint = '/api/locations';
 
 const useLocations = () => {
-  const { data, error } = useSWR<Location[]>(endpoint, fetcher);
+  const { data, error, isValidating } = useSWR<Location[]>(endpoint, fetcher, {
+    revalidateOnFocus: false,
+  });
 
   return {
     data: data,
     isLoading: !error && !data,
     isError: error,
+    isValidating: isValidating,
   };
 };
 

@@ -11,7 +11,7 @@ import useLocations from '../../../hooks/use-locations';
 const Locations: NextPage = () => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
 
-  const { data: locations, isLoading, isError } = useLocations();
+  const { data: locations, isLoading, isError, isValidating } = useLocations();
 
   return (
     <>
@@ -23,7 +23,7 @@ const Locations: NextPage = () => {
       <DashboardHeader
         title='Locations'
         color='green'
-        loading={isLoading}
+        loading={isLoading || isValidating}
         action={
           <DashboardHeaderAction
             title='New Location'
