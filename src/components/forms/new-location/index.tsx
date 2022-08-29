@@ -17,9 +17,11 @@ type InitialValues = {
   longitude: string;
 };
 
-type Props = {};
+type Props = {
+  onSubmit?: () => void;
+};
 
-const FormNewLocation = (props: Props) => {
+const FormNewLocation = ({ onSubmit }: Props) => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
 
   const initialValues: InitialValues = {
@@ -32,8 +34,11 @@ const FormNewLocation = (props: Props) => {
     <Formik
       initialValues={initialValues}
       validationSchema={locationSchema}
-      onSubmit={(values, actions) => {
+      onSubmit={async (values, actions) => {
         console.log(values);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // Successfully Submitted
+        onSubmit && onSubmit();
       }}
     >
       {({
@@ -74,6 +79,7 @@ const FormNewLocation = (props: Props) => {
                 onClick={modalHandlers.open}
                 variant='default'
                 leftIcon={<IconCurrentLocation size={16} />}
+                disabled={isSubmitting}
               >
                 Select Location
               </Button>
@@ -101,6 +107,9 @@ const FormNewLocation = (props: Props) => {
                 disabled={isSubmitting}
                 required
               />
+              <Button type='submit' loading={isSubmitting}>
+                Submit
+              </Button>
             </Stack>
           </form>
         </>

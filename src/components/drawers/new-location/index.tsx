@@ -18,7 +18,7 @@ const DrawerNewLocation = ({ opened, onClose, position = 'left' }: Props) => {
       padding='lg'
       size='lg'
     >
-      <FormNewLocation />
+      <FormNewLocation onSubmit={onClose} />
     </Drawer>
   );
 };
