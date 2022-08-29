@@ -1,6 +1,9 @@
-import { NumberInput, TextInput } from '@mantine/core';
+import { Button, NumberInput, Stack, TextInput } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconCurrentLocation } from '@tabler/icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import ModalSelectLocation from '../../modals/select-location';
 
 const locationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -17,6 +20,8 @@ type InitialValues = {
 type Props = {};
 
 const FormNewLocation = (props: Props) => {
+  const [modalOpened, modalHandlers] = useDisclosure(false);
+
   const initialValues: InitialValues = {
     name: '',
     latitude: '',
@@ -39,45 +44,66 @@ const FormNewLocation = (props: Props) => {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
       }) => (
-        <form style={{ width: '100%' }} onSubmit={handleSubmit}>
-          <TextInput
-            name='name'
-            label='Name'
-            description='Non-public name for your location'
-            placeholder='Name'
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.name && errors.name}
-            disabled={isSubmitting}
-            required
+        <>
+          <ModalSelectLocation
+            opened={modalOpened}
+            onClose={modalHandlers.close}
+            onSelect={(value) => {
+              setFieldValue('latitude', value.lat);
+              setFieldValue('longitude', value.lng);
+            }}
           />
-          <TextInput
-            name='latitude'
-            label='Latitude'
-            description='Latitude of your location'
-            placeholder='Latitude'
-            value={values.latitude}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.latitude && errors.latitude}
-            disabled={isSubmitting}
-            required
-          />
-          <TextInput
-            name='longitude'
-            label='Longitude'
-            description='Longitude of your location'
-            placeholder='Longitude'
-            value={values.longitude}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.longitude && errors.longitude}
-            disabled={isSubmitting}
-            required
-          />
-        </form>
+          <form style={{ width: '100%' }} onSubmit={handleSubmit}>
+            <Stack spacing='xs'>
+              <TextInput
+                name='name'
+                label='Name'
+                description='Non-public name for your location'
+                placeholder='Name'
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.name && errors.name}
+                disabled={isSubmitting}
+                required
+                autoComplete='off'
+              />
+              <Button
+                onClick={modalHandlers.open}
+                variant='default'
+                leftIcon={<IconCurrentLocation size={16} />}
+              >
+                Select Location
+              </Button>
+              <TextInput
+                name='latitude'
+                label='Latitude'
+                description='Latitude of your location'
+                placeholder='Latitude'
+                value={values.latitude}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.latitude && errors.latitude}
+                disabled={isSubmitting}
+                required
+              />
+              <TextInput
+                name='longitude'
+                label='Longitude'
+                description='Longitude of your location'
+                placeholder='Longitude'
+                value={values.longitude}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.longitude && errors.longitude}
+                disabled={isSubmitting}
+                required
+              />
+            </Stack>
+          </form>
+        </>
       )}
     </Formik>
   );
