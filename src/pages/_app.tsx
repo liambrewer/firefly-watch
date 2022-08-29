@@ -43,7 +43,7 @@ function MyApp({
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
-          theme={{ colorScheme }}
+          theme={{ colorScheme, loader: 'bars' }}
           emotionCache={emotionCache}
         >
           <NotificationsProvider>
