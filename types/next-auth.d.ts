@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import type { User } from 'next-auth';
 
 declare module 'next-auth' {
   /**
@@ -8,6 +9,6 @@ declare module 'next-auth' {
     user: {
       /** The user's id. */
       id: string;
-    };
+    } & User;
   }
 }
