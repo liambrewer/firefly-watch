@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import ModalSelectLocation from '../../modals/select-location';
 
 export const locationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+  name: Yup.string().required('Name is required').max(64, 'Name is too long'),
   latitude: Yup.number().required('Latitude is required').min(-90).max(90),
   longitude: Yup.number().required('Longitude is required').min(-180).max(180),
 });

@@ -1,20 +1,5 @@
-import {
-  AspectRatio,
-  Button,
-  Collapse,
-  Modal,
-  SegmentedControl,
-  Stack,
-  Text,
-  TextInput,
-} from '@mantine/core';
-import { IconLocation } from '@tabler/icons';
-import dynamic from 'next/dynamic';
+import { Button, Modal, Stack, Text, TextInput } from '@mantine/core';
 import { useState } from 'react';
-
-const SelectMapWithNoSSR = dynamic(() => import('../../maps/select-map'), {
-  ssr: false,
-});
 
 type Props = {
   opened: boolean;

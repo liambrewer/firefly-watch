@@ -7,6 +7,7 @@ import axios from 'axios';
 import type { AxiosError } from 'axios';
 import { mutate } from 'swr';
 import ModalDeleteLocation from '../../modals/delete-location';
+import Link from 'next/link';
 
 type Props = {
   locations: Location[];
@@ -69,7 +70,11 @@ const ListItem = ({ location }: { location: Location }) => {
           <Text>Latitude: {location.latitude}</Text>
           <Text>Longitude: {location.longitude}</Text>
           <Group>
-            <Button leftIcon={<IconLiveView stroke={1.5} />}>View</Button>
+            <Link href={`/dashboard/locations/${location.id}`} passHref>
+              <Button leftIcon={<IconLiveView stroke={1.5} />} component='a'>
+                View
+              </Button>
+            </Link>
             <Button
               color='red'
               leftIcon={<IconTrashX stroke={1.5} />}

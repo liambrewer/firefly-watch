@@ -3,11 +3,11 @@ import type { AxiosError } from 'axios';
 import useSWR from 'swr';
 import fetcher from '../utils/fetcher';
 
-const endpoint = '/api/locations';
+const endpoint = '/api/locations/';
 
-const useLocations = () => {
-  const { data, error, isValidating } = useSWR<Location[], AxiosError>(
-    endpoint,
+const useLocation = (id: string) => {
+  const { data, error, isValidating } = useSWR<Location, AxiosError>(
+    endpoint + id,
     fetcher,
     {
       revalidateOnFocus: false,
@@ -22,4 +22,4 @@ const useLocations = () => {
   };
 };
 
-export default useLocations;
+export default useLocation;
