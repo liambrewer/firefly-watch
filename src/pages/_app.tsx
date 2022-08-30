@@ -9,6 +9,7 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { getCookie, setCookie } from 'cookies-next';
 import App from 'next/app';
 import { useState } from 'react';
+import { ModalsProvider } from '@mantine/modals';
 
 type Props = {
   colorScheme: ColorScheme;
@@ -47,11 +48,13 @@ function MyApp({
           emotionCache={emotionCache}
         >
           <NotificationsProvider>
-            <SessionProvider session={session}>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </SessionProvider>
+            <ModalsProvider>
+              <SessionProvider session={session}>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </SessionProvider>
+            </ModalsProvider>
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
