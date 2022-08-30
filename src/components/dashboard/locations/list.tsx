@@ -2,7 +2,7 @@ import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import type { Location } from '@prisma/client';
-import { IconLiveView, IconTrashX } from '@tabler/icons';
+import { IconLiveView, IconTrash } from '@tabler/icons';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
 import { mutate } from 'swr';
@@ -77,7 +77,7 @@ const ListItem = ({ location }: { location: Location }) => {
             </Link>
             <Button
               color='red'
-              leftIcon={<IconTrashX stroke={1.5} />}
+              leftIcon={<IconTrash stroke={1.5} />}
               onClick={modalHandlers.open}
             >
               Delete
