@@ -4,7 +4,7 @@ import getServerSession from '../../../utils/getServerSession';
 import nc from 'next-connect';
 import formidable from 'formidable';
 import type { Fields, Files } from 'formidable';
-import * as yup from 'yup';
+import { locationSchema } from '../../../components/forms/new-location';
 
 export const config = {
   api: {
@@ -27,38 +27,20 @@ handler.get(async (req, res) => {
 
   if (!session) return res.status(401).json([]);
 
-  const prisma = new PrismaClient();
+  try {
+    const prisma = new PrismaClient();
 
-  const locations = await prisma.location.findMany({
-    where: {
-      userId: session.user.id,
-    },
-  });
+    const locations = await prisma.location.findMany({
+      where: {
+        userId: session.user.id,
+      },
+    });
 
-  // Placeholder Data
-
-  // res.status(200).json([
-  //   {
-  //     id: '1',
-  //     name: 'Home',
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //     userId: '1',
-  //     latitude: 0,
-  //     longitude: 0,
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Work',
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //     userId: '1',
-  //     latitude: 0,
-  //     longitude: 0,
-  //   },
-  // ]);
-
-  res.status(200).json(locations);
+    res.status(200).json(locations);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json([]);
+  }
 });
 
 handler.post(async (req, res) => {
@@ -86,14 +68,8 @@ handler.post(async (req, res) => {
 
   const { name, latitude, longitude } = formData.fields;
 
-  const schema = yup.object().shape({
-    name: yup.string().required(),
-    latitude: yup.number().required(),
-    longitude: yup.number().required(),
-  });
-
   try {
-    await schema.validate({ name, latitude, longitude });
+    await locationSchema.validate({ name, latitude, longitude });
   } catch (err) {
     console.error(err);
     return res.status(400).json([]);

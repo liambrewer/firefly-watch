@@ -8,7 +8,7 @@ import { mutate } from 'swr';
 import * as Yup from 'yup';
 import ModalSelectLocation from '../../modals/select-location';
 
-const locationSchema = Yup.object().shape({
+export const locationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   latitude: Yup.number().required('Latitude is required'),
   longitude: Yup.number().required('Longitude is required'),
