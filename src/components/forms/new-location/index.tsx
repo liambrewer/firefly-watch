@@ -1,7 +1,10 @@
-import { Button, NumberInput, Stack, TextInput } from '@mantine/core';
+import { Button, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { showNotification } from '@mantine/notifications';
 import { IconCurrentLocation } from '@tabler/icons';
+import axios from 'axios';
 import { Formik } from 'formik';
+import { mutate } from 'swr';
 import * as Yup from 'yup';
 import ModalSelectLocation from '../../modals/select-location';
 
@@ -34,9 +37,22 @@ const FormNewLocation = ({ onSubmit }: Props) => {
     <Formik
       initialValues={initialValues}
       validationSchema={locationSchema}
-      onSubmit={async (values, actions) => {
-        console.log(values);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+      onSubmit={async (values, { setSubmitting }) => {
+        try {
+          await axios.post('/api/locations', values, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+          mutate('/api/locations');
+        } catch (err) {
+          console.log(err);
+          showNotification({
+            title: 'Error',
+            message: 'Something went wrong',
+            color: 'red',
+          });
+        } finally {
+          setSubmitting(false);
+        }
         // Successfully Submitted
         onSubmit && onSubmit();
       }}
