@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { IconCurrentLocation, IconLocation } from '@tabler/icons';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -36,12 +37,26 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
   };
 
   const handleGeoLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLatlng({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLatlng({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        showNotification({
+          title: 'Location Found',
+          message: 'Check the map to confirm your location',
+          color: 'green',
+        });
+      },
+      (err) => {
+        showNotification({
+          title: 'Location Error',
+          message: err.message,
+          color: 'red',
+        });
+      }
+    );
   };
 
   return (
