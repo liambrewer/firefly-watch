@@ -2,7 +2,7 @@ import { Button, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconCurrentLocation } from '@tabler/icons';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Formik } from 'formik';
 import { mutate } from 'swr';
 import * as Yup from 'yup';
@@ -44,12 +44,21 @@ const FormNewLocation = ({ onSubmit }: Props) => {
           });
           mutate('/api/locations');
         } catch (err) {
-          console.log(err);
-          showNotification({
-            title: 'Error',
-            message: 'Something went wrong',
-            color: 'red',
-          });
+          if (axios.isAxiosError(err)) {
+            const error = err as AxiosError;
+            showNotification({
+              title: 'Error',
+              message: error.response?.statusText,
+              color: 'red',
+            });
+          } else {
+            console.log(err);
+            showNotification({
+              title: 'Error',
+              message: 'Something went wrong',
+              color: 'red',
+            });
+          }
         } finally {
           setSubmitting(false);
         }
