@@ -1,4 +1,4 @@
-import { MapContainer, Marker, useMapEvent } from 'react-leaflet';
+import { MapContainer, Marker, useMapEvents } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -11,9 +11,10 @@ type SelectLocationProps = {
 };
 
 const SelectLocation = ({ handleClick }: SelectLocationProps) => {
-  const map = useMapEvent('click', (e) => {
-    handleClick(e.latlng.wrap());
-    map.flyTo(e.latlng, 12);
+  const map = useMapEvents({
+    click: (e) => {
+      handleClick(e.latlng.wrap());
+    },
   });
 
   return null;

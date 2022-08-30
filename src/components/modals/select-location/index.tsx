@@ -2,12 +2,13 @@ import {
   AspectRatio,
   Button,
   Collapse,
+  Group,
   Modal,
   SegmentedControl,
   Stack,
   Text,
 } from '@mantine/core';
-import { IconLocation } from '@tabler/icons';
+import { IconCurrentLocation, IconLocation } from '@tabler/icons';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -34,6 +35,15 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
     onClose();
   };
 
+  const handleGeoLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatlng({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  };
+
   return (
     <Modal
       opened={opened}
@@ -42,14 +52,25 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
       size='xl'
     >
       <Stack>
-        <SegmentedControl
-          data={[
-            { label: 'Street', value: 'street' },
-            { label: 'Satellite', value: 'satellite' },
-          ]}
-          value={mapType}
-          onChange={(value) => setMapType(value as 'street' | 'satellite')}
-        />
+        <Group grow>
+          <SegmentedControl
+            data={[
+              { label: 'Street', value: 'street' },
+              { label: 'Satellite', value: 'satellite' },
+            ]}
+            value={mapType}
+            onChange={(value) => setMapType(value as 'street' | 'satellite')}
+          />
+          {'geolocation' in navigator && (
+            <Button
+              variant='default'
+              leftIcon={<IconCurrentLocation size={16} />}
+              onClick={handleGeoLocation}
+            >
+              Acquire Location
+            </Button>
+          )}
+        </Group>
         <AspectRatio ratio={16 / 9}>
           <SelectMapWithNoSSR
             handleClick={(value) => setLatlng(value)}
