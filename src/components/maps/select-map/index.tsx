@@ -12,7 +12,7 @@ type SelectLocationProps = {
 
 const SelectLocation = ({ handleClick }: SelectLocationProps) => {
   const map = useMapEvent('click', (e) => {
-    handleClick(e.latlng);
+    handleClick(e.latlng.wrap());
     map.flyTo(e.latlng, 12);
   });
 
