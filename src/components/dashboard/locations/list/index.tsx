@@ -1,4 +1,4 @@
-import { Paper, Stack, Title } from '@mantine/core';
+import { Paper, Stack, Text, Title } from '@mantine/core';
 import type { Location } from '@prisma/client';
 
 type Props = {
@@ -10,6 +10,8 @@ const ListItem = ({ location }: { location: Location }) => {
     <Paper>
       <Stack>
         <Title>{location.name}</Title>
+        <Text>Latitude: {location.latitude}</Text>
+        <Text>Longitude: {location.longitude}</Text>
       </Stack>
     </Paper>
   );
