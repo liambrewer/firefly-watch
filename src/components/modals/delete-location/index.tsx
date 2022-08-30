@@ -57,9 +57,7 @@ const ModalDeleteLocation = ({
         <Button
           color='red'
           onClick={handleConfirm}
-          disabled={
-            confirmation.toLowerCase() !== confirmationText.toLowerCase()
-          }
+          disabled={confirmation !== confirmationText}
         >
           Delete Location
         </Button>
