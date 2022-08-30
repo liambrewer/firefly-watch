@@ -1,4 +1,4 @@
-import { Divider, Group, Skeleton, Text } from '@mantine/core';
+import { Avatar, Divider, Group, Skeleton, Text } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import HeaderAuthButtons from './auth-buttons';
 import HeaderLogout from './logout';
@@ -14,7 +14,10 @@ const HeaderUserArea = () => {
   return (
     <Group>
       {session?.data?.user ? (
-        <Text>Hey, {session.data.user.name}.</Text>
+        <Group spacing='xs'>
+          <Text>Hey, {session.data.user.name}.</Text>
+          <Avatar src={session.data.user.image} alt='User Profile Picture' />
+        </Group>
       ) : (
         <HeaderAuthButtons />
       )}
