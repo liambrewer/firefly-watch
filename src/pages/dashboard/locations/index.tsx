@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderAction from '../../../components/dashboard/header/action';
 import DashboardLocationsList from '../../../components/dashboard/locations/list';
+import DashboardLocationsListSkeleton from '../../../components/dashboard/locations/list-skeleton';
 import DrawerNewLocation from '../../../components/drawers/new-location';
 import useLocations from '../../../hooks/use-locations';
 
@@ -34,12 +35,13 @@ const Locations: NextPage = () => {
           </DashboardHeaderAction>
         }
       />
-      {locations &&
-        (locations.length > 0 ? (
-          <DashboardLocationsList locations={locations} />
-        ) : (
-          <Text>No locations found.</Text>
-        ))}
+      {isLoading ? (
+        <DashboardLocationsListSkeleton />
+      ) : locations && locations.length > 0 ? (
+        <DashboardLocationsList locations={locations} />
+      ) : (
+        <Text>No locations found.</Text>
+      )}
     </>
   );
 };
