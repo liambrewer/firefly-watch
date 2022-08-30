@@ -12,10 +12,7 @@ export const config = {
   },
 };
 
-const handler = nc<
-  NextApiRequest,
-  NextApiResponse<Location[] | Location | null>
->({
+const handler = nc<NextApiRequest, NextApiResponse<Location[] | Location>>({
   onError: (err, req, res, next) => {
     console.error(err.stack);
     res.status(500).end('Something broke!');
