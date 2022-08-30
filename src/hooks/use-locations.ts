@@ -6,7 +6,7 @@ import fetcher from '../utils/fetcher';
 const endpoint = '/api/locations';
 
 const useLocations = () => {
-  const { data, error, isValidating } = useSWR<Location[], AxiosError>(
+  const { data, error, isValidating, mutate } = useSWR<Location[], AxiosError>(
     endpoint,
     fetcher,
     {
@@ -19,6 +19,7 @@ const useLocations = () => {
     isLoading: !error && !data,
     isError: error,
     isValidating: isValidating,
+    mutate: mutate,
   };
 };
 

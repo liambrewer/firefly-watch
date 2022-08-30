@@ -12,7 +12,10 @@ export const config = {
   },
 };
 
-const handler = nc<NextApiRequest, NextApiResponse<Location[]>>({
+const handler = nc<
+  NextApiRequest,
+  NextApiResponse<Location[] | Location | null>
+>({
   onError: (err, req, res, next) => {
     console.error(err.stack);
     res.status(500).end('Something broke!');
@@ -46,7 +49,7 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   const session = await getServerSession(req, res);
 
-  if (!session) return res.status(401).json([]);
+  if (!session) return res.status(401).end('Unauthorized');
 
   let formData: { fields: Fields; files: Files };
 
@@ -63,7 +66,7 @@ handler.post(async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json([]);
+    return res.status(500).end('Internal Server Error');
   }
 
   const { name, latitude, longitude } = formData.fields;
@@ -72,7 +75,7 @@ handler.post(async (req, res) => {
     await locationSchema.validate({ name, latitude, longitude });
   } catch (err) {
     console.error(err);
-    return res.status(400).json([]);
+    return res.status(400).end('Bad Request');
   }
 
   try {
@@ -87,10 +90,10 @@ handler.post(async (req, res) => {
       },
     });
 
-    res.status(200).json([location]);
+    res.status(200).json(location);
   } catch (err) {
     console.error(err);
-    res.status(500).json([]);
+    res.status(500).end('Internal Server Error');
   }
 });
 

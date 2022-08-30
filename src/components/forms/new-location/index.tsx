@@ -1,11 +1,12 @@
 import { Button, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { showNotification } from '@mantine/notifications';
+import { showNotification, updateNotification } from '@mantine/notifications';
+import { Location } from '@prisma/client';
 import { IconCurrentLocation } from '@tabler/icons';
 import axios, { AxiosError } from 'axios';
 import { Formik } from 'formik';
-import { mutate } from 'swr';
 import * as Yup from 'yup';
+import useLocations from '../../../hooks/use-locations';
 import ModalSelectLocation from '../../modals/select-location';
 
 export const locationSchema = Yup.object().shape({
@@ -27,6 +28,8 @@ type Props = {
 const FormNewLocation = ({ onSubmit }: Props) => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
 
+  const { data: locations, mutate } = useLocations();
+
   const initialValues: InitialValues = {
     name: '',
     latitude: '',
@@ -39,21 +42,45 @@ const FormNewLocation = ({ onSubmit }: Props) => {
       validationSchema={locationSchema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          await axios.post('/api/locations', values, {
+          showNotification({
+            id: 'new-location',
+            title: `Creating Location: ${values.name}`,
+            message: 'Please wait...',
+            loading: true,
+            autoClose: false,
+            disallowClose: true,
+          });
+
+          const res = await axios.post<Location>('/api/locations', values, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          mutate('/api/locations');
+
+          // Optimistically update the locations list
+          const newLocations = locations
+            ? [...locations, res.data]
+            : [res.data];
+          mutate(newLocations);
+
+          // Update the notification
+          updateNotification({
+            id: 'new-location',
+            title: `Created Location: ${res.data.name}`,
+            message: 'Location created successfully',
+            color: 'green',
+          });
         } catch (err) {
           if (axios.isAxiosError(err)) {
             const error = err as AxiosError;
-            showNotification({
+            updateNotification({
+              id: 'new-location',
               title: 'Error',
               message: error.response?.statusText,
               color: 'red',
             });
           } else {
             console.log(err);
-            showNotification({
+            updateNotification({
+              id: 'new-location',
               title: 'Error',
               message: 'Something went wrong',
               color: 'red',

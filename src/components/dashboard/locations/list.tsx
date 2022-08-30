@@ -5,9 +5,9 @@ import type { Location } from '@prisma/client';
 import { IconLiveView, IconTrash } from '@tabler/icons';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
-import { mutate } from 'swr';
 import ModalDeleteLocation from '../../modals/delete-location';
 import Link from 'next/link';
+import useLocations from '../../../hooks/use-locations';
 
 type Props = {
   locations: Location[];
@@ -15,6 +15,8 @@ type Props = {
 
 const ListItem = ({ location }: { location: Location }) => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
+
+  const { data: locations, mutate } = useLocations();
 
   const handleDelete = async () => {
     showNotification({
@@ -28,7 +30,7 @@ const ListItem = ({ location }: { location: Location }) => {
 
     try {
       await axios.delete(`/api/locations/${location.id}`);
-      mutate('/api/locations');
+      mutate(locations?.filter((l) => l.id !== location.id));
       updateNotification({
         id: `delete-location-${location.id}`,
         title: `Deleted Location: ${location.name}`,
