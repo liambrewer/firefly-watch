@@ -18,6 +18,7 @@ const NavLinks: NavbarLink[] = [
     href: '/dashboard/observations',
     icon: <IconEye size={16} />,
     color: 'violet',
+    exact: false,
   },
   {
     title: 'Locations',

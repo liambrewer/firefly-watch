@@ -26,7 +26,7 @@ const Locations: NextPage = () => {
         error={isError ? isError.message : null}
         color='green'
         loading={isLoading || isValidating}
-        action={
+        actions={
           <DashboardHeaderAction
             title='New Location'
             onClick={modalHandlers.open}

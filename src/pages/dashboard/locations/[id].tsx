@@ -1,10 +1,10 @@
-import { AspectRatio, Box } from '@mantine/core';
+import { AspectRatio } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons';
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import DashboardHeader from '../../../components/dashboard/header';
-import DashboardHeaderAction from '../../../components/dashboard/header/action';
+import DashboardHeaderLink from '../../../components/dashboard/header/link';
 import useLocation from '../../../hooks/use-location';
 
 const MarkerMapWithNoSSR = dynamic(
@@ -32,13 +32,10 @@ const Location: NextPage = () => {
         error={isError ? isError.message : null}
         color='green'
         loading={isLoading || isValidating}
-        action={
-          <DashboardHeaderAction
-            title='Back'
-            onClick={() => router.replace('/dashboard/locations')}
-          >
+        actions={
+          <DashboardHeaderLink title='Back' href='/dashboard/locations'>
             <IconArrowLeft />
-          </DashboardHeaderAction>
+          </DashboardHeaderLink>
         }
       />
       {location && (

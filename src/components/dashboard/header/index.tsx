@@ -14,7 +14,7 @@ type Props = {
   error?: string | null;
   color?: DefaultMantineColor;
   loading?: boolean;
-  action?: React.ReactNode;
+  actions?: React.ReactNode;
 };
 
 const DashboardHeader = ({
@@ -22,7 +22,7 @@ const DashboardHeader = ({
   error,
   color = 'blue',
   loading,
-  action,
+  actions,
 }: Props) => {
   return (
     <Stack spacing='xs' mb='xs'>
@@ -40,7 +40,7 @@ const DashboardHeader = ({
             </Alert>
           )}
         </Group>
-        {action}
+        <Group spacing='xs'>{actions}</Group>
       </Group>
       <Divider />
     </Stack>

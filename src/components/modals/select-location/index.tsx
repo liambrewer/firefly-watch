@@ -75,6 +75,7 @@ const ModalSelectLocation = ({ opened, onClose, onSelect }: Props) => {
             ]}
             value={mapType}
             onChange={(value) => setMapType(value as 'street' | 'satellite')}
+            transitionDuration={500}
           />
           {'geolocation' in navigator && (
             <Button

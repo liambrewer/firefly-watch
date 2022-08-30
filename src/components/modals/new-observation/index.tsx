@@ -7,7 +7,12 @@ type Props = {
 
 const ModalNewObservation = ({ opened, onClose }: Props) => {
   return (
-    <Modal opened={opened} onClose={onClose} title='New Observation'></Modal>
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title='New Observation'
+      fullScreen
+    ></Modal>
   );
 };
 
