@@ -25,6 +25,7 @@ const ListItem = ({ observation }: ListItemProps) => {
         <Text>Amount 1: {observation.amount1}</Text>
         <Text>Amount 2: {observation.amount2}</Text>
         <Text>Amount 3: {observation.amount3}</Text>
+        <Text>Date: {observation.date.toString()}</Text>
         <Text>Time: {observation.time.toString()}</Text>
         <Text>Habitat: {observation.habitat}</Text>
         <Text>Mowed: {observation.mowed}</Text>

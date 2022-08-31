@@ -85,6 +85,7 @@ model Observation {
   amount1       Int
   amount2       Int
   amount3       Int
+  date          DateTime
   time          DateTime
   habitat       Habitat_type
   mowed         Boolean

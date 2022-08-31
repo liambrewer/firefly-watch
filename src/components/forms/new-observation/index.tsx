@@ -9,7 +9,7 @@ import {
   Text,
   Textarea,
 } from '@mantine/core';
-import { TimeInput } from '@mantine/dates';
+import { DatePicker, TimeInput } from '@mantine/dates';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import {
   Artificial_light_type,
@@ -21,7 +21,7 @@ import {
   Precipitation_type,
   Wind_type,
 } from '@prisma/client';
-import { IconEye } from '@tabler/icons';
+import { IconCalendarTime, IconEye } from '@tabler/icons';
 import axios, { AxiosError } from 'axios';
 import { Formik } from 'formik';
 import Link from 'next/link';
@@ -30,7 +30,8 @@ import * as Yup from 'yup';
 import useObservations from '../../../hooks/use-observations';
 
 export const observationSchema = Yup.object().shape({
-  time: Yup.date().required('Required'),
+  date: Yup.date().required('Date is required'),
+  time: Yup.date().required('Time is required'),
   amount1: Yup.number()
     .required('Required')
     .min(0, "You can't see a negative amount of fireflies...")
@@ -74,6 +75,7 @@ export const observationSchema = Yup.object().shape({
 });
 
 type InitialValues = {
+  date?: Date;
   time?: Date;
   amount1?: number;
   amount2?: number;
@@ -100,7 +102,8 @@ const FormNewObservation = ({ location }: Props) => {
   const { data: observations, mutate } = useObservations();
 
   const initialValues: InitialValues = {
-    time: new Date(),
+    date: undefined,
+    time: undefined,
     amount1: undefined,
     amount2: undefined,
     amount3: undefined,
@@ -198,11 +201,35 @@ const FormNewObservation = ({ location }: Props) => {
               page.
             </Text>
             <Divider />
-            <Text>Select the time of the observation.</Text>
+            <Text>Select the date and time of the observation.</Text>
+            <Button
+              variant='default'
+              size='lg'
+              leftIcon={<IconCalendarTime />}
+              onClick={() => {
+                setFieldValue('date', new Date());
+                setFieldValue('time', new Date());
+              }}
+            >
+              Fill in the current date and time
+            </Button>
+            <DatePicker
+              label='Observation Date'
+              name='date'
+              description='The date of the observation.'
+              placeholder='Select a date'
+              value={values.date}
+              onChange={(date) => setFieldValue('date', date)}
+              onBlur={handleBlur}
+              error={touched.date && errors.date}
+              required
+              clearable={false}
+            />
             <TimeInput
               label='Observation Time'
               name='time'
               description='The time of the observation.'
+              placeholder='Select a time'
               format='12'
               value={values.time}
               onChange={(value) => setFieldValue('time', value)}

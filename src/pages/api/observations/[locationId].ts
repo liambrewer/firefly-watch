@@ -15,6 +15,7 @@ import formidable, { Fields, Files } from 'formidable';
 import { observationSchema } from '../../../components/forms/new-observation';
 
 type ObservationFormData = {
+  date: Date;
   time: Date;
   amount1: number;
   amount2: number;
@@ -90,6 +91,7 @@ handler.post(async (req, res) => {
     }
 
     const {
+      date,
       time,
       amount1,
       amount2,
@@ -108,6 +110,7 @@ handler.post(async (req, res) => {
 
     try {
       await observationSchema.validate({
+        date,
         time,
         amount1,
         amount2,
@@ -135,6 +138,7 @@ handler.post(async (req, res) => {
           locationId: id,
           latitude: location.latitude,
           longitude: location.longitude,
+          date,
           time,
           amount1: Number(amount1),
           amount2: Number(amount2),

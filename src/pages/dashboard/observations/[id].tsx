@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Observation: NextPageWithAuth<Props> = ({ observation }) => {
-  const date = new Date(observation.time);
+  const date = new Date(observation.date);
 
   return (
     <>
@@ -35,7 +35,8 @@ const Observation: NextPageWithAuth<Props> = ({ observation }) => {
         3: {observation.amount3}
       </Text>
       <Text>
-        Time: {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+        Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}, Time:{' '}
+        {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
       </Text>
       <Text>
         Habitat: {observation.habitat}, Mowed: {String(observation.mowed)}
