@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { ModalsProvider } from '@mantine/modals';
 import { NextComponentType, NextPageContext } from 'next';
 import AuthGuard from '../components/auth-guard';
+import { RouterTransition } from '../components/router-transition';
 
 type Props = {
   Component: NextComponentType<NextPageContext, any, {}> & {
@@ -55,6 +56,7 @@ function MyApp({
           <NotificationsProvider>
             <ModalsProvider>
               <SessionProvider session={session}>
+                <RouterTransition />
                 {Component.requireAuth ? (
                   <AuthGuard>
                     <Layout>
