@@ -39,14 +39,15 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?    @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   locations     Location[]
+  Observation   Observation[]
 }
 
 model VerificationToken {
@@ -58,12 +59,89 @@ model VerificationToken {
 }
 
 model Location {
-  id        String   @id @default(cuid())
-  userId    String
+  id     String @id @default(cuid())
+  userId String
+
   name      String
   latitude  Float
   longitude Float
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  Observation Observation[]
+}
+
+model Observation {
+  id         String @id @default(cuid())
+  userId     String
+  locationId String
+
+  longitude Float
+  latitude  Float
+
+  amount1       Int
+  amount2       Int
+  amount3       Int
+  time          DateTime
+  habitat       Habitat_type
+  mowed         Boolean
+  temperature   Float
+  precipitation Precipitation_type
+  wind          Wind_type
+  cloud         Cloud_type
+  light         Artificial_light_type
+  pattern       Pattern_type
+  patternDesc   String?
+  notes         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  location Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+}
+
+enum Habitat_type {
+  field
+  lawn
+  wetland
+  forest
+  pavement
+  other
+}
+
+enum Precipitation_type {
+  foggy
+  light_rain
+  heavy_rain
+  none
+}
+
+enum Wind_type {
+  calm
+  light
+  strong
+}
+
+enum Cloud_type {
+  clear
+  partly_cloudy
+  overcast
+}
+
+enum Artificial_light_type {
+  none
+  within_habitat
+  near_habitat
+  far_habitat
+}
+
+enum Pattern_type {
+  none
+  one
+  two
+  three
 }
