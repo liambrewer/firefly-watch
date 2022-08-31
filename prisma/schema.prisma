@@ -114,7 +114,7 @@ enum Habitat_type {
 }
 
 enum Precipitation_type {
-  foggy
+  fog
   light_rain
   heavy_rain
   none

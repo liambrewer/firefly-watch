@@ -1,4 +1,5 @@
-import { Location, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import type { Location } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getServerSession from '../../../utils/getServerSession';
 import nc from 'next-connect';
