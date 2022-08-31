@@ -10,6 +10,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import App from 'next/app';
 import { useState } from 'react';
 import { ModalsProvider } from '@mantine/modals';
+import { RouterTransition } from '../components/router-transition';
 
 type Props = {
   colorScheme: ColorScheme;
@@ -51,6 +52,7 @@ function MyApp({
             <ModalsProvider>
               <SessionProvider session={session}>
                 <Layout>
+                  <RouterTransition />
                   <Component {...pageProps} />
                 </Layout>
               </SessionProvider>
