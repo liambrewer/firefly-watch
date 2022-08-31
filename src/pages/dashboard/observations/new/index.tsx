@@ -1,13 +1,13 @@
 import { Text } from '@mantine/core';
 import { IconX } from '@tabler/icons';
-import type { NextPage } from 'next';
+import { NextPageWithAuth } from '../../../../components/auth-guard';
 import DashboardHeader from '../../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../../components/dashboard/header/link';
 import DashboardObservationsSelectList from '../../../../components/dashboard/observations/select-list';
 import DashboardObservationsSelectListSkeleton from '../../../../components/dashboard/observations/select-list/skeleton';
 import useLocations from '../../../../hooks/use-locations';
 
-const SelectLocation: NextPage = () => {
+const SelectLocation: NextPageWithAuth = () => {
   const { data: locations, isLoading, isError, isValidating } = useLocations();
 
   return (
@@ -35,3 +35,5 @@ const SelectLocation: NextPage = () => {
 };
 
 export default SelectLocation;
+
+SelectLocation.requireAuth = true;

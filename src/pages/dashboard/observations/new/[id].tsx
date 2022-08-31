@@ -1,11 +1,7 @@
 import { Location, PrismaClient } from '@prisma/client';
 import { IconX } from '@tabler/icons';
-import type {
-  GetServerSideProps,
-  NextApiRequest,
-  NextApiResponse,
-  NextPage,
-} from 'next';
+import type { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
+import { NextPageWithAuth } from '../../../../components/auth-guard';
 import DashboardHeader from '../../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../../components/dashboard/header/link';
 import FormNewObservation from '../../../../components/forms/new-observation';
@@ -15,7 +11,7 @@ type Props = {
   location: Location;
 };
 
-const NewObservation: NextPage<Props> = ({ location }) => {
+const NewObservation: NextPageWithAuth<Props> = ({ location }) => {
   return (
     <>
       <DashboardHeader
@@ -79,3 +75,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 };
+
+NewObservation.requireAuth = true;

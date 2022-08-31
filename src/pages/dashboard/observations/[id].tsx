@@ -1,12 +1,8 @@
 import { Text } from '@mantine/core';
 import { Observation, PrismaClient } from '@prisma/client';
 import { IconArrowLeft } from '@tabler/icons';
-import type {
-  GetServerSideProps,
-  NextApiRequest,
-  NextApiResponse,
-  NextPage,
-} from 'next';
+import type { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
+import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../components/dashboard/header/link';
 import getServerSession from '../../../utils/getServerSession';
@@ -15,7 +11,7 @@ type Props = {
   observation: Observation;
 };
 
-const Observation: NextPage<Props> = ({ observation }) => {
+const Observation: NextPageWithAuth<Props> = ({ observation }) => {
   const date = new Date(observation.time);
 
   return (
@@ -105,3 +101,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 };
+
+Observation.requireAuth = true;

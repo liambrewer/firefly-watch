@@ -1,13 +1,13 @@
 import { Text } from '@mantine/core';
 import { IconPencilPlus } from '@tabler/icons';
-import type { NextPage } from 'next';
+import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../components/dashboard/header/link';
 import DashboardLocationsListSkeleton from '../../../components/dashboard/locations/list-skeleton';
 import DashboardObservationsList from '../../../components/dashboard/observations/list';
 import useObservations from '../../../hooks/use-observations';
 
-const Observations: NextPage = () => {
+const Observations: NextPageWithAuth = () => {
   const {
     data: observations,
     isLoading,
@@ -42,3 +42,5 @@ const Observations: NextPage = () => {
 };
 
 export default Observations;
+
+Observations.requireAuth = true;

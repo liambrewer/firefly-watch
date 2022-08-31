@@ -1,7 +1,7 @@
 import { Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconLocation } from '@tabler/icons';
-import type { NextPage } from 'next';
+import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderAction from '../../../components/dashboard/header/action';
 import DashboardLocationsList from '../../../components/dashboard/locations/list';
@@ -9,7 +9,7 @@ import DashboardLocationsListSkeleton from '../../../components/dashboard/locati
 import DrawerNewLocation from '../../../components/drawers/new-location';
 import useLocations from '../../../hooks/use-locations';
 
-const Locations: NextPage = () => {
+const Locations: NextPageWithAuth = () => {
   const [modalOpened, modalHandlers] = useDisclosure(false);
 
   const { data: locations, isLoading, isError, isValidating } = useLocations();
@@ -47,3 +47,5 @@ const Locations: NextPage = () => {
 };
 
 export default Locations;
+
+Locations.requireAuth = true;

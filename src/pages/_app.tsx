@@ -10,9 +10,13 @@ import { getCookie, setCookie } from 'cookies-next';
 import App from 'next/app';
 import { useState } from 'react';
 import { ModalsProvider } from '@mantine/modals';
-import { RouterTransition } from '../components/router-transition';
+import { NextComponentType, NextPageContext } from 'next';
+import AuthGuard from '../components/auth-guard';
 
 type Props = {
+  Component: NextComponentType<NextPageContext, any, {}> & {
+    requireAuth?: boolean;
+  };
   colorScheme: ColorScheme;
 };
 
@@ -51,10 +55,17 @@ function MyApp({
           <NotificationsProvider>
             <ModalsProvider>
               <SessionProvider session={session}>
-                <Layout>
-                  <RouterTransition />
-                  <Component {...pageProps} />
-                </Layout>
+                {Component.requireAuth ? (
+                  <AuthGuard>
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </AuthGuard>
+                ) : (
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                )}
               </SessionProvider>
             </ModalsProvider>
           </NotificationsProvider>

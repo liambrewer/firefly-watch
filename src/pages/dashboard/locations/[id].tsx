@@ -1,8 +1,8 @@
 import { AspectRatio } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons';
-import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../components/dashboard/header/link';
 import useLocation from '../../../hooks/use-location';
@@ -14,7 +14,7 @@ const MarkerMapWithNoSSR = dynamic(
   }
 );
 
-const Location: NextPage = () => {
+const Location: NextPageWithAuth = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -54,3 +54,5 @@ const Location: NextPage = () => {
 };
 
 export default Location;
+
+Location.requireAuth = true;

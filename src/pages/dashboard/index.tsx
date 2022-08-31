@@ -1,8 +1,10 @@
-import type { NextPage } from 'next';
+import { NextPageWithAuth } from '../../components/auth-guard';
 import DashboardHeader from '../../components/dashboard/header';
 
-const Dashboard: NextPage = () => {
+const Dashboard: NextPageWithAuth = () => {
   return <DashboardHeader title='Dashboard' color='blue' />;
 };
 
 export default Dashboard;
+
+Dashboard.requireAuth = true;
