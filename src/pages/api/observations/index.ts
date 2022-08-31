@@ -33,34 +33,7 @@ handler.get(async (req, res) => {
       },
     });
 
-    // res.status(200).json(observations);
-
-    // Placeholder data
-    res.status(200).json([
-      {
-        id: '1',
-        userId: '1',
-        locationId: '1',
-        longitude: 0,
-        latitude: 0,
-        amount1: 5,
-        amount2: 7,
-        amount3: 9,
-        time: new Date(),
-        habitat: 'forest',
-        mowed: false,
-        temperature: 65.4,
-        precipitation: 'heavy_rain',
-        wind: 'strong',
-        cloud: 'overcast',
-        light: 'near_habitat',
-        pattern: 'three',
-        patternDesc: 'none',
-        notes: 'none',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ]);
+    res.status(200).json(observations);
   } catch (err) {
     console.error(err);
     res.status(500).end('Internal Server Error');

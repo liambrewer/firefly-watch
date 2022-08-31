@@ -4,6 +4,12 @@ import { IconLiveView } from '@tabler/icons';
 
 import Link from 'next/link';
 
+/*
+
+TEMPORARY ------------------------------------------------------------------
+
+*/
+
 type ListItemProps = {
   observation: Observation;
 };
