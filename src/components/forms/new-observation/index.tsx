@@ -94,9 +94,10 @@ type InitialValues = {
 
 type Props = {
   location: Location;
+  onSubmit?: (observation: Observation) => void;
 };
 
-const FormNewObservation = ({ location }: Props) => {
+const FormNewObservation = ({ location, onSubmit }: Props) => {
   const router = useRouter();
 
   const { data: observations, mutate } = useObservations();
@@ -156,8 +157,7 @@ const FormNewObservation = ({ location }: Props) => {
             color: 'green',
           });
 
-          // Redirect
-          router.push(`/dashboard/observations/${res.data.id}`);
+          onSubmit && onSubmit(res.data);
         } catch (err) {
           if (axios.isAxiosError(err)) {
             const error = err as AxiosError;

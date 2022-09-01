@@ -1,6 +1,10 @@
-import { Location, PrismaClient } from '@prisma/client';
-import { IconX } from '@tabler/icons';
+import { Center, Group, ThemeIcon, Title } from '@mantine/core';
+import { useWindowScroll } from '@mantine/hooks';
+import { Location, Observation, PrismaClient } from '@prisma/client';
+import { IconCheck, IconX } from '@tabler/icons';
 import type { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { NextPageWithAuth } from '../../../../components/auth-guard';
 import DashboardHeader from '../../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../../components/dashboard/header/link';
@@ -12,6 +16,17 @@ type Props = {
 };
 
 const NewObservation: NextPageWithAuth<Props> = ({ location }) => {
+  const router = useRouter();
+  const [scroll, scrollTo] = useWindowScroll();
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const onSubmit = (observation: Observation) => {
+    scrollTo({ y: 0 });
+    setSubmitted(true);
+    router.replace(`/dashboard/observations/${observation.id}`);
+  };
+
   return (
     <>
       <DashboardHeader
@@ -23,7 +38,20 @@ const NewObservation: NextPageWithAuth<Props> = ({ location }) => {
           </DashboardHeaderLink>
         }
       />
-      <FormNewObservation location={location} />
+      {submitted ? (
+        <Center>
+          <Group>
+            <ThemeIcon size='xl' color='green'>
+              <IconCheck />
+            </ThemeIcon>
+            <Title order={2}>
+              Your observation has been submitted, thanks for your contribution!
+            </Title>
+          </Group>
+        </Center>
+      ) : (
+        <FormNewObservation location={location} onSubmit={onSubmit} />
+      )}
     </>
   );
 };
