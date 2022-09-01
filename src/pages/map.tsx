@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
 const BasicMapWithNoSSR = dynamic(
   () => import('../components/maps/basic-map'),
@@ -9,7 +10,14 @@ const BasicMapWithNoSSR = dynamic(
 );
 
 const Home: NextPage = () => {
-  return <BasicMapWithNoSSR />;
+  return (
+    <>
+      <Head>
+        <title>Map | Firefly Watch</title>
+      </Head>
+      <BasicMapWithNoSSR />
+    </>
+  );
 };
 
 export default Home;
