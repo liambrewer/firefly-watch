@@ -41,7 +41,10 @@ const Observations: NextPageWithAuth = () => {
       ) : observations && observations.length > 0 ? (
         <DashboardObservationsList observations={observations} />
       ) : (
-        <Text>No observations found.</Text>
+        <Text>
+          No observations found. Click the pencil in the top right to create
+          one.
+        </Text>
       )}
     </>
   );

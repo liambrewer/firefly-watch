@@ -46,7 +46,9 @@ const Locations: NextPageWithAuth = () => {
       ) : locations && locations.length > 0 ? (
         <DashboardLocationsList locations={locations} />
       ) : (
-        <Text>No locations found.</Text>
+        <Text>
+          No locations found. Click the button in the top right to create one.
+        </Text>
       )}
     </>
   );

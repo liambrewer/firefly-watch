@@ -1,5 +1,6 @@
-import { Text } from '@mantine/core';
+import { Anchor, Text } from '@mantine/core';
 import { IconX } from '@tabler/icons';
+import Link from 'next/link';
 import { NextPageWithAuth } from '../../../../components/auth-guard';
 import DashboardHeader from '../../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../../components/dashboard/header/link';
@@ -38,7 +39,12 @@ const SelectLocation: NextPageWithAuth = () => {
       ) : locations && locations.length > 0 ? (
         <DashboardObservationsSelectList locations={locations} />
       ) : (
-        <Text>No locations found.</Text>
+        <Text>
+          No locations found.{' '}
+          <Link href='/dashboard/locations' passHref>
+            <Anchor component='a'>Create one to submit an observation.</Anchor>
+          </Link>
+        </Text>
       )}
     </>
   );
