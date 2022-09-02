@@ -1,4 +1,4 @@
-import { Anchor, Breadcrumbs } from '@mantine/core';
+import { Anchor, Breadcrumbs, DefaultMantineColor } from '@mantine/core';
 import Link from 'next/link';
 
 export type BreadcrumbLink = {
@@ -8,9 +8,10 @@ export type BreadcrumbLink = {
 
 type Props = {
   links?: BreadcrumbLink[];
+  color?: DefaultMantineColor;
 };
 
-const DashboardHeaderBreadcrumbs = ({ links = [] }: Props) => {
+const DashboardHeaderBreadcrumbs = ({ links = [], color = 'blue' }: Props) => {
   const breadcrumbLinks: BreadcrumbLink[] = [
     {
       title: 'Dashboard',
@@ -24,7 +25,9 @@ const DashboardHeaderBreadcrumbs = ({ links = [] }: Props) => {
       {breadcrumbLinks.map(({ title, href }, index) => {
         return (
           <Link href={href} passHref key={index}>
-            <Anchor component='a'>{title}</Anchor>
+            <Anchor component='a' color={color}>
+              {title}
+            </Anchor>
           </Link>
         );
       })}

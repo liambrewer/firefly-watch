@@ -52,7 +52,7 @@ const DashboardHeader = ({
           <Group spacing='xs'>{actions}</Group>
         </Group>
         <Divider />
-        <DashboardHeaderBreadcrumbs links={links} />
+        <DashboardHeaderBreadcrumbs links={links} color={color} />
         <Divider />
       </Stack>
     </>
