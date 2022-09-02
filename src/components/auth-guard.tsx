@@ -38,7 +38,7 @@ const AuthGuard = ({ children }: Props) => {
       pathname: '/auth/login',
       query: {
         ...router.query,
-        returnUrl: router.pathname,
+        returnUrl: router.asPath,
       },
     });
     return (
