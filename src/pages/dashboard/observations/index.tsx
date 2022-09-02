@@ -3,17 +3,12 @@ import { IconPencilPlus } from '@tabler/icons';
 import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../components/dashboard/header/link';
-import DashboardLocationsListSkeleton from '../../../components/dashboard/locations/list-skeleton';
 import DashboardObservationsList from '../../../components/dashboard/observations/list';
+import DashboardObservationsListSkeleton from '../../../components/dashboard/observations/list-skeleton';
 import useObservations from '../../../hooks/use-observations';
 
 const Observations: NextPageWithAuth = () => {
-  const {
-    data: observations,
-    isLoading,
-    isError,
-    isValidating,
-  } = useObservations();
+  const { data: observations, isLoading, isValidating } = useObservations();
 
   return (
     <>
@@ -37,7 +32,7 @@ const Observations: NextPageWithAuth = () => {
         ]}
       />
       {isLoading ? (
-        <DashboardLocationsListSkeleton />
+        <DashboardObservationsListSkeleton />
       ) : observations && observations.length > 0 ? (
         <DashboardObservationsList observations={observations} />
       ) : (
