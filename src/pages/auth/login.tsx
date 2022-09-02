@@ -3,8 +3,12 @@ import { IconBrandGoogle } from '@tabler/icons';
 import type { NextPage } from 'next';
 import { signIn } from 'next-auth/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const Login: NextPage = () => {
+  const router = useRouter();
+  const { returnUrl } = router.query;
+
   return (
     <>
       <Head>
@@ -17,7 +21,9 @@ const Login: NextPage = () => {
             <Button
               leftIcon={<IconBrandGoogle />}
               color='red'
-              onClick={() => signIn('google', { callbackUrl: '/' })}
+              onClick={() =>
+                signIn('google', { callbackUrl: (returnUrl as string) ?? '/' })
+              }
             >
               Continue with Google
             </Button>

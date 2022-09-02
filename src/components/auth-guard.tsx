@@ -34,7 +34,13 @@ const AuthGuard = ({ children }: Props) => {
       message: 'Redirecting you to the sign in page',
       color: 'yellow',
     });
-    router.replace('/auth/login');
+    router.replace({
+      pathname: '/auth/login',
+      query: {
+        ...router.query,
+        returnUrl: router.pathname,
+      },
+    });
     return (
       <Center sx={{ height: '100vh' }}>
         <Group>
