@@ -1,6 +1,6 @@
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import type { Observation } from '@prisma/client';
-import { IconLiveView } from '@tabler/icons';
+import { IconEye } from '@tabler/icons';
 
 import Link from 'next/link';
 
@@ -39,7 +39,7 @@ const ListItem = ({ observation }: ListItemProps) => {
         <Text>Notes: {observation.notes}</Text>
         <Group>
           <Link href={`/dashboard/observations/${observation.id}`} passHref>
-            <Button leftIcon={<IconLiveView stroke={1.5} />} component='a'>
+            <Button leftIcon={<IconEye stroke={1.5} />} component='a'>
               View
             </Button>
           </Link>

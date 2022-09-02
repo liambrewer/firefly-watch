@@ -29,6 +29,12 @@ const Observations: NextPageWithAuth = () => {
             <IconPencilPlus />
           </DashboardHeaderLink>
         }
+        links={[
+          {
+            title: 'Observations',
+            href: '/dashboard/observations',
+          },
+        ]}
       />
       {isLoading ? (
         <DashboardLocationsListSkeleton />

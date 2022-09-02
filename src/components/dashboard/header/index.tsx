@@ -1,5 +1,6 @@
 import {
   Alert,
+  Box,
   Divider,
   Group,
   Loader,
@@ -9,6 +10,7 @@ import {
 } from '@mantine/core';
 import type { DefaultMantineColor } from '@mantine/core';
 import Head from 'next/head';
+import DashboardHeaderBreadcrumbs, { BreadcrumbLink } from './breadcrumbs';
 
 type Props = {
   title: string | undefined;
@@ -16,6 +18,7 @@ type Props = {
   color?: DefaultMantineColor;
   loading?: boolean;
   actions?: React.ReactNode;
+  links?: BreadcrumbLink[];
 };
 
 const DashboardHeader = ({
@@ -24,6 +27,7 @@ const DashboardHeader = ({
   color = 'blue',
   loading,
   actions,
+  links,
 }: Props) => {
   return (
     <>
@@ -47,6 +51,8 @@ const DashboardHeader = ({
           </Group>
           <Group spacing='xs'>{actions}</Group>
         </Group>
+        <Divider />
+        <DashboardHeaderBreadcrumbs links={links} />
         <Divider />
       </Stack>
     </>

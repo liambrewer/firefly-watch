@@ -22,6 +22,16 @@ const SelectLocation: NextPageWithAuth = () => {
             <IconX />
           </DashboardHeaderLink>
         }
+        links={[
+          {
+            title: 'Observations',
+            href: '/dashboard/observations',
+          },
+          {
+            title: 'New',
+            href: '/dashboard/observations/new',
+          },
+        ]}
       />
       {isLoading ? (
         <DashboardObservationsSelectListSkeleton />

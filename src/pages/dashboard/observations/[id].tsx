@@ -26,6 +26,16 @@ const Observation: NextPageWithAuth<Props> = ({ observation }) => {
             <IconArrowLeft />
           </DashboardHeaderLink>
         }
+        links={[
+          {
+            title: 'Observations',
+            href: '/dashboard/observations',
+          },
+          {
+            title: observation.id,
+            href: `/dashboard/observations/${observation.id}`,
+          },
+        ]}
       />
       <Text>
         Latitude: {observation.latitude}, Longitude: {observation.longitude}

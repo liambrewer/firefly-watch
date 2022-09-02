@@ -34,6 +34,12 @@ const Locations: NextPageWithAuth = () => {
             <IconLocation />
           </DashboardHeaderAction>
         }
+        links={[
+          {
+            title: 'Locations',
+            href: '/dashboard/locations',
+          },
+        ]}
       />
       {isLoading ? (
         <DashboardLocationsListSkeleton />

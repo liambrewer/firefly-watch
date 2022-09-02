@@ -37,6 +37,20 @@ const NewObservation: NextPageWithAuth<Props> = ({ location }) => {
             <IconX />
           </DashboardHeaderLink>
         }
+        links={[
+          {
+            title: 'Observations',
+            href: '/dashboard/observations',
+          },
+          {
+            title: 'New',
+            href: '/dashboard/observations/new',
+          },
+          {
+            title: location.name,
+            href: `/dashboard/observations/new/${location.id}`,
+          },
+        ]}
       />
       {submitted ? (
         <Center>

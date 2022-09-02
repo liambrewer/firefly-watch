@@ -37,6 +37,16 @@ const Location: NextPageWithAuth = () => {
             <IconArrowLeft />
           </DashboardHeaderLink>
         }
+        links={[
+          {
+            title: 'Locations',
+            href: '/dashboard/locations',
+          },
+          {
+            title: location?.name ?? 'Loading...',
+            href: `/dashboard/locations/${id}`,
+          },
+        ]}
       />
       {location && (
         <AspectRatio ratio={2 / 1}>
