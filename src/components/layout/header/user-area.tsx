@@ -83,7 +83,7 @@ const HeaderUserArea = () => {
         <Menu.Label>Dashboard</Menu.Label>
         <Menu.Item
           component={NextLink}
-          href='/dashboard/observations'
+          href='/dashboard'
           color='blue'
           icon={<IconHome size={14} />}
         >
