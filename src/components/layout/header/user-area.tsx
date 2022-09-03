@@ -62,10 +62,14 @@ const HeaderUserArea = () => {
     });
 
   return session.status === 'authenticated' ? (
-    <Menu width={200} position='bottom-end' withinPortal>
+    <Menu width={200} position='bottom-end' offset={15} withinPortal>
       <Menu.Target>
         <UnstyledButton>
-          <Avatar src={session.data.user.image} alt='User Profile Picture'>
+          <Avatar
+            src={session.data.user.image}
+            alt='User Profile Picture'
+            radius='xl'
+          >
             {session.data.user.name
               ?.split(' ')
               .map((word) => word[0])
