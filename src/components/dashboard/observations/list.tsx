@@ -1,4 +1,4 @@
-import { Anchor, Skeleton, Table } from '@mantine/core';
+import { Anchor, Badge, Skeleton, Table } from '@mantine/core';
 import type { Observation } from '@prisma/client';
 import moment from 'moment';
 import Link from 'next/link';
@@ -27,10 +27,14 @@ const ListItem = ({ observation }: ListItemProps) => {
       <td>
         {location?.name ? (
           <Link href={`/dashboard/locations/${location.id}`} passHref>
-            <Anchor component='a'>{location?.name}</Anchor>
+            <Badge component='a' variant='filled' sx={{ cursor: 'pointer' }}>
+              {location?.name}
+            </Badge>
           </Link>
         ) : (
-          <Skeleton visible>Loading...</Skeleton>
+          <Skeleton radius='xl' visible>
+            <Badge>Loading...</Badge>
+          </Skeleton>
         )}
       </td>
       <td>{observation.amount1}</td>

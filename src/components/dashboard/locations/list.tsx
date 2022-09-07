@@ -1,4 +1,13 @@
-import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Group,
+  Paper,
+  SimpleGrid,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import type { Location } from '@prisma/client';
@@ -66,14 +75,18 @@ const ListItem = ({ location }: { location: Location }) => {
         onClose={modalHandlers.close}
         onConfirm={handleDelete}
       />
-      <Paper p='md'>
+      <Card p='md' withBorder>
         <Stack spacing='xs'>
-          <Title>{location.name}</Title>
+          <Title order={2}>{location.name}</Title>
           <Text>Latitude: {location.latitude}</Text>
           <Text>Longitude: {location.longitude}</Text>
-          <Group>
+          <Group spacing='xs' noWrap>
             <Link href={`/dashboard/locations/${location.id}`} passHref>
-              <Button leftIcon={<IconLiveView stroke={1.5} />} component='a'>
+              <Button
+                leftIcon={<IconLiveView stroke={1.5} />}
+                component='a'
+                fullWidth
+              >
                 View
               </Button>
             </Link>
@@ -81,23 +94,30 @@ const ListItem = ({ location }: { location: Location }) => {
               color='red'
               leftIcon={<IconTrash stroke={1.5} />}
               onClick={modalHandlers.open}
+              fullWidth
             >
               Delete
             </Button>
           </Group>
         </Stack>
-      </Paper>
+      </Card>
     </>
   );
 };
 
 const DashboardLocationsList = ({ locations }: Props) => {
   return (
-    <Stack>
+    <SimpleGrid
+      cols={3}
+      breakpoints={[
+        { maxWidth: 900, cols: 1 },
+        { maxWidth: 1300, cols: 2 },
+      ]}
+    >
       {locations.map((location) => (
         <ListItem key={location.id} location={location} />
       ))}
-    </Stack>
+    </SimpleGrid>
   );
 };
 
