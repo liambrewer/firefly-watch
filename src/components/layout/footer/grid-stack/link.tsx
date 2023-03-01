@@ -8,8 +8,14 @@ type Props = {
 
 const FooterGridStackLink = ({ title, href }: Props) => {
   return (
-    <Link href={href} passHref>
-      <Text component='a'>{title}</Text>
+    <Link
+      href={href}
+      style={{
+        textDecoration: 'none',
+        color: 'inherit',
+      }}
+    >
+      <Text>{title}</Text>
     </Link>
   );
 };

@@ -21,6 +21,7 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import HeaderAuthButtons from './auth-buttons';
 
 const HeaderUserArea = () => {
@@ -81,38 +82,34 @@ const HeaderUserArea = () => {
         <Menu.Label>Hey, {session.data.user.name}.</Menu.Label>
         <Menu.Divider />
         <Menu.Label>Dashboard</Menu.Label>
-        <Menu.Item
-          component={NextLink}
-          href='/dashboard'
-          color='blue'
-          icon={<IconHome size={14} />}
-        >
-          Home
-        </Menu.Item>
-        <Menu.Item
-          component={NextLink}
-          href='/dashboard/observations'
-          color='violet'
-          icon={<IconEye size={14} />}
-        >
-          Observations
-        </Menu.Item>
-        <Menu.Item
-          component={NextLink}
-          href='/dashboard/locations'
-          color='teal'
-          icon={<IconCurrentLocation size={14} />}
-        >
-          Locations
-        </Menu.Item>
-        <Menu.Item
-          component={NextLink}
-          href='/dashboard/settings'
-          color='orange'
-          icon={<IconSettings size={14} />}
-        >
-          Settings
-        </Menu.Item>
+        <Link href='/dashboard' passHref legacyBehavior>
+          <Menu.Item component='a' color='blue' icon={<IconHome size={14} />}>
+            Home
+          </Menu.Item>
+        </Link>
+        <Link href='/dashboard/observations' passHref legacyBehavior>
+          <Menu.Item component='a' color='violet' icon={<IconEye size={14} />}>
+            Observations
+          </Menu.Item>
+        </Link>
+        <Link href='/dashboard/locations' passHref legacyBehavior>
+          <Menu.Item
+            component='a'
+            color='teal'
+            icon={<IconCurrentLocation size={14} />}
+          >
+            Locations
+          </Menu.Item>
+        </Link>
+        <Link href='/dashboard/settings' passHref legacyBehavior>
+          <Menu.Item
+            component='a'
+            color='orange'
+            icon={<IconSettings size={14} />}
+          >
+            Settings
+          </Menu.Item>
+        </Link>
         <Menu.Divider />
         <Menu.Item
           onClick={() => toggleColorScheme()}

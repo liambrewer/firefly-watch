@@ -1,5 +1,5 @@
 import { ActionIcon, Tooltip } from '@mantine/core';
-import { NextLink } from '@mantine/next';
+import Link from 'next/link';
 
 type Props = {
   title: string;
@@ -10,15 +10,11 @@ type Props = {
 const DashboardHeaderLink = ({ title, href, children }: Props) => {
   return (
     <Tooltip label={title} position='left' withArrow>
-      <ActionIcon
-        component={NextLink}
-        href={href}
-        color='dark'
-        variant='filled'
-        size='xl'
-      >
-        {children}
-      </ActionIcon>
+      <Link href={href} passHref legacyBehavior>
+        <ActionIcon component='a' color='dark' variant='filled' size='xl'>
+          {children}
+        </ActionIcon>
+      </Link>
     </Tooltip>
   );
 };

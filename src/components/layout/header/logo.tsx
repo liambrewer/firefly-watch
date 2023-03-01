@@ -3,17 +3,14 @@ import Link from 'next/link';
 
 const HeaderLogo = () => {
   return (
-    <Link href='/' passHref>
-      <Box
-        component='a'
-        sx={{
-          textDecoration: 'none',
-          color: 'inherit',
-          cursor: 'pointer',
-        }}
-      >
-        <Title>Firefly Watch</Title>
-      </Box>
+    <Link
+      href='/'
+      style={{
+        textDecoration: 'none',
+        color: 'inherit',
+      }}
+    >
+      <Title>Firefly Watch</Title>
     </Link>
   );
 };

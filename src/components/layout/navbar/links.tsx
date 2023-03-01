@@ -37,11 +37,17 @@ const Link = ({
     : router.pathname.startsWith(href);
 
   return (
-    <NextLink href={href} key={title} passHref>
+    <NextLink
+      href={href}
+      key={title}
+      style={{
+        textDecoration: 'none',
+        color: 'inherit',
+      }}
+    >
       <NavLink
         active={active}
         color={color}
-        component='a'
         label={title}
         icon={
           icon && (

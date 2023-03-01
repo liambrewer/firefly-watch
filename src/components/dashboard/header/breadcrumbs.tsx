@@ -24,7 +24,7 @@ const DashboardHeaderBreadcrumbs = ({ links = [], color = 'blue' }: Props) => {
     <Breadcrumbs>
       {breadcrumbLinks.map(({ title, href }, index) => {
         return (
-          <Link href={href} passHref key={index}>
+          <Link href={href} key={index} passHref legacyBehavior>
             <Anchor component='a' color={color}>
               {title}
             </Anchor>

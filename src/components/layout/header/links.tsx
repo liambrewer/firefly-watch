@@ -24,7 +24,7 @@ const HeaderLinks = ({ links }: Props) => {
           : router.pathname.startsWith(href);
 
         return (
-          <Link href={href} key={title} passHref>
+          <Link href={href} key={title} passHref legacyBehavior>
             <Button
               component='a'
               color='dark'

@@ -20,13 +20,21 @@ const ListItem = ({ observation }: ListItemProps) => {
   return (
     <tr>
       <td>
-        <Link href={`/dashboard/observations/${observation.id}`}>
+        <Link
+          href={`/dashboard/observations/${observation.id}`}
+          passHref
+          legacyBehavior
+        >
           <Anchor component='a'>{observation.id}</Anchor>
         </Link>
       </td>
       <td>
         {location?.name ? (
-          <Link href={`/dashboard/locations/${location.id}`} passHref>
+          <Link
+            href={`/dashboard/locations/${location.id}`}
+            passHref
+            legacyBehavior
+          >
             <Badge component='a' variant='filled' sx={{ cursor: 'pointer' }}>
               {location?.name}
             </Badge>

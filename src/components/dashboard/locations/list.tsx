@@ -81,7 +81,11 @@ const ListItem = ({ location }: { location: Location }) => {
           <Text>Latitude: {location.latitude}</Text>
           <Text>Longitude: {location.longitude}</Text>
           <Group spacing='xs' noWrap>
-            <Link href={`/dashboard/locations/${location.id}`} passHref>
+            <Link
+              href={`/dashboard/locations/${location.id}`}
+              passHref
+              legacyBehavior
+            >
               <Button
                 leftIcon={<IconLiveView stroke={1.5} />}
                 component='a'

@@ -12,7 +12,11 @@ const ListItem = ({ location }: ListItemProps) => {
     <Paper p='xs'>
       <Group position='apart'>
         <Title order={3}>{location.name}</Title>
-        <Link href={`/dashboard/observations/new/${location.id}`} passHref>
+        <Link
+          href={`/dashboard/observations/new/${location.id}`}
+          passHref
+          legacyBehavior
+        >
           <Button rightIcon={<IconArrowRight />} component='a'>
             New Observation
           </Button>

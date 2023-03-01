@@ -195,7 +195,7 @@ const FormNewObservation = ({ location, onSubmit }: Props) => {
           <Stack spacing='xs'>
             <Text weight={500}>
               Before observing fireflies, please read the{' '}
-              <Link href='/about' passHref>
+              <Link href='/about' passHref legacyBehavior>
                 <Anchor component='a'>About</Anchor>
               </Link>{' '}
               page.
