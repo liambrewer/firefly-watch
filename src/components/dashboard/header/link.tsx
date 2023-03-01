@@ -10,11 +10,15 @@ type Props = {
 const DashboardHeaderLink = ({ title, href, children }: Props) => {
   return (
     <Tooltip label={title} position='left' withArrow>
-      <Link href={href} passHref legacyBehavior>
-        <ActionIcon component='a' color='dark' variant='filled' size='xl'>
-          {children}
-        </ActionIcon>
-      </Link>
+      <ActionIcon
+        component={Link}
+        href={href}
+        color='dark'
+        variant='filled'
+        size='xl'
+      >
+        {children}
+      </ActionIcon>
     </Tooltip>
   );
 };
