@@ -1,5 +1,5 @@
 import { Button, Center, Paper, Stack, Title } from '@mantine/core';
-import { IconBrandGoogle } from '@tabler/icons';
+import { IconBrandGoogle } from '@tabler/icons-react';
 import type { NextPage } from 'next';
 import { signIn } from 'next-auth/react';
 import Head from 'next/head';

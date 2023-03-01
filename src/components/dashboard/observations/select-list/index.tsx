@@ -1,6 +1,6 @@
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import type { Location } from '@prisma/client';
-import { IconArrowRight } from '@tabler/icons';
+import { IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 
 type ListItemProps = {

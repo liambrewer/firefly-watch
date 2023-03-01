@@ -1,5 +1,5 @@
 import { Text } from '@mantine/core';
-import { IconPencilPlus } from '@tabler/icons';
+import { IconPencilPlus } from '@tabler/icons-react';
 import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';
 import DashboardHeaderLink from '../../../components/dashboard/header/link';

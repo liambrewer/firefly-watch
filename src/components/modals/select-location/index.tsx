@@ -9,7 +9,7 @@ import {
   Text,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconCurrentLocation, IconLocation } from '@tabler/icons';
+import { IconCurrentLocation, IconLocation } from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 

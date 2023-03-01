@@ -2,7 +2,7 @@ import { Button, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { Location } from '@prisma/client';
-import { IconCurrentLocation } from '@tabler/icons';
+import { IconCurrentLocation } from '@tabler/icons-react';
 import axios, { AxiosError } from 'axios';
 import { Formik } from 'formik';
 import * as Yup from 'yup';

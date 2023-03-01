@@ -11,7 +11,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import type { Location } from '@prisma/client';
-import { IconLiveView, IconTrash } from '@tabler/icons';
+import { IconLiveView, IconTrash } from '@tabler/icons-react';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
 import ModalDeleteLocation from '../../modals/delete-location';

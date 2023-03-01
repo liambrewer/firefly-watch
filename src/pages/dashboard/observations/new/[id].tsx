@@ -1,7 +1,7 @@
 import { Center, Group, ThemeIcon, Title } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 import { Location, Observation, PrismaClient } from '@prisma/client';
-import { IconCheck, IconX } from '@tabler/icons';
+import { IconCheck, IconX } from '@tabler/icons-react';
 import type { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

@@ -1,5 +1,5 @@
 import { AspectRatio } from '@mantine/core';
-import { IconArrowLeft } from '@tabler/icons';
+import { IconArrowLeft } from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { NextPageWithAuth } from '../../../components/auth-guard';

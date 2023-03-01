@@ -4,7 +4,7 @@ import {
   IconEye,
   IconHome,
   IconSettings,
-} from '@tabler/icons';
+} from '@tabler/icons-react';
 import NavbarLinks, { NavbarLink } from './links';
 
 const NavLinks: NavbarLink[] = [

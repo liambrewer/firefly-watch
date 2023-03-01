@@ -21,7 +21,7 @@ import {
   Precipitation_type,
   Wind_type,
 } from '@prisma/client';
-import { IconCalendarTime, IconEye } from '@tabler/icons';
+import { IconCalendarTime, IconEye } from '@tabler/icons-react';
 import axios, { AxiosError } from 'axios';
 import { Formik } from 'formik';
 import Link from 'next/link';

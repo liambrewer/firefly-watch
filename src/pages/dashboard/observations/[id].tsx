@@ -1,6 +1,6 @@
 import { Text } from '@mantine/core';
 import { Observation, PrismaClient } from '@prisma/client';
-import { IconArrowLeft } from '@tabler/icons';
+import { IconArrowLeft } from '@tabler/icons-react';
 import type { GetServerSideProps, NextApiRequest, NextApiResponse } from 'next';
 import { NextPageWithAuth } from '../../../components/auth-guard';
 import DashboardHeader from '../../../components/dashboard/header';

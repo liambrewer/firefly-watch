@@ -1,5 +1,5 @@
 import { Anchor, Text } from '@mantine/core';
-import { IconX } from '@tabler/icons';
+import { IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import { NextPageWithAuth } from '../../../../components/auth-guard';
 import DashboardHeader from '../../../../components/dashboard/header';

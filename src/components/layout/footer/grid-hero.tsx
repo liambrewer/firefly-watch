@@ -6,7 +6,7 @@ import {
   Title,
   Tooltip,
 } from '@mantine/core';
-import { IconBrandDiscord, IconBrandGithub } from '@tabler/icons';
+import { IconBrandDiscord, IconBrandGithub } from '@tabler/icons-react';
 
 type IconLinkProps = {
   icon: React.ReactNode;

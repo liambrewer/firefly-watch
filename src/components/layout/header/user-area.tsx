@@ -19,7 +19,7 @@ import {
   IconSettings,
   IconSun,
   IconX,
-} from '@tabler/icons';
+} from '@tabler/icons-react';
 import { signOut, useSession } from 'next-auth/react';
 import HeaderAuthButtons from './auth-buttons';
 
